@@ -40,7 +40,7 @@ function ModalSearch({
     <>
       {/* Modal backdrop */}
       <Transition
-        className="fixed inset-0 bg-slate-900 bg-opacity-30 z-50 transition-opacity"
+        className="fixed inset-0 bg-black bg-opacity-30 z-50 transition-opacity"
         show={modalOpen}
         enter="transition ease-out duration-200"
         enterStart="opacity-0"
@@ -100,7 +100,7 @@ function ModalSearch({
               <ul className="text-sm">
                 <li>
                   <Link
-                    className="flex items-center p-2 text-slate-800 dark:text-slate-100 hover:text-white hover:bg-indigo-500 rounded group"
+                    className="flex items-center p-2 text-slate-800 dark:text-slate-100 hover:text-white hover:bg-gray-600 rounded group"
                     to="#0"
                     onClick={() => setModalOpen(!modalOpen)}
                   >
@@ -115,7 +115,7 @@ function ModalSearch({
                 </li>
                 <li>
                   <Link
-                    className="flex items-center p-2 text-slate-800 dark:text-slate-100 hover:text-white hover:bg-indigo-500 rounded group"
+                    className="flex items-center p-2 text-slate-800 dark:text-slate-100 hover:text-white hover:bg-gray-600 rounded group"
                     to="#0"
                     onClick={() => setModalOpen(!modalOpen)}
                   >
@@ -130,7 +130,7 @@ function ModalSearch({
                 </li>
                 <li>
                   <Link
-                    className="flex items-center p-2 text-slate-800 dark:text-slate-100 hover:text-white hover:bg-indigo-500 rounded group"
+                    className="flex items-center p-2 text-slate-800 dark:text-slate-100 hover:text-white hover:bg-gray-600 rounded group"
                     to="#0"
                     onClick={() => setModalOpen(!modalOpen)}
                   >
@@ -145,7 +145,7 @@ function ModalSearch({
                 </li>
                 <li>
                   <Link
-                    className="flex items-center p-2 text-slate-800 dark:text-slate-100 hover:text-white hover:bg-indigo-500 rounded group"
+                    className="flex items-center p-2 text-slate-800 dark:text-slate-100 hover:text-white hover:bg-gray-600 rounded group"
                     to="#0"
                     onClick={() => setModalOpen(!modalOpen)}
                   >
@@ -160,7 +160,7 @@ function ModalSearch({
                 </li>
                 <li>
                   <Link
-                    className="flex items-center p-2 text-slate-800 dark:text-slate-100 hover:text-white hover:bg-indigo-500 rounded group"
+                    className="flex items-center p-2 text-slate-800 dark:text-slate-100 hover:text-white hover:bg-gray-600 rounded group"
                     to="#0"
                     onClick={() => setModalOpen(!modalOpen)}
                   >
@@ -175,7 +175,7 @@ function ModalSearch({
                 </li>
                 <li>
                   <Link
-                    className="flex items-center p-2 text-slate-800 dark:text-slate-100 hover:text-white hover:bg-indigo-500 rounded group"
+                    className="flex items-center p-2 text-slate-800 dark:text-slate-100 hover:text-white hover:bg-gray-600 rounded group"
                     to="#0"
                     onClick={() => setModalOpen(!modalOpen)}
                   >
@@ -196,7 +196,7 @@ function ModalSearch({
               <ul className="text-sm">
                 <li>
                   <Link
-                    className="flex items-center p-2 text-slate-800 dark:text-slate-100 hover:text-white hover:bg-indigo-500 rounded group"
+                    className="flex items-center p-2 text-slate-800 dark:text-slate-100 hover:text-white hover:bg-gray-600 rounded group"
                     to="#0"
                     onClick={() => setModalOpen(!modalOpen)}
                   >
@@ -214,7 +214,7 @@ function ModalSearch({
                 </li>
                 <li>
                   <Link
-                    className="flex items-center p-2 text-slate-800 dark:text-slate-100 hover:text-white hover:bg-indigo-500 rounded group"
+                    className="flex items-center p-2 text-slate-800 dark:text-slate-100 hover:text-white hover:bg-gray-600 rounded group"
                     to="#0"
                     onClick={() => setModalOpen(!modalOpen)}
                   >
