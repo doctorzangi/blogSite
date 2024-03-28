@@ -3,7 +3,7 @@ import MainLayout from "../../Layouts/MainLayout";
 import Widget from "../../components/zWidget";
 import { FaGetPocket, FaPlus } from "react-icons/fa";
 
-const Blogs = () => {
+const Users = () => {
 
   return (
     <MainLayout>
@@ -11,15 +11,15 @@ const Blogs = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-4 p-4">
           <Widget
             icon={<FaPlus className="h-7 w-7" />}
-            title="New Blogs"
-            subtitle="Create Blog"
-            linkTo="/blogs/newblog"
+            title="New User"
+            subtitle="Create Users"
+            linkTo="/users/newuser"
           />
           <Widget
             icon={<FaGetPocket className="h-7 w-7" />}
-            title="Retrieve Blogs"
-            subtitle="Blogs List"
-            linkTo="/blogs/list"
+            title="Retrieve User"
+            subtitle="Users List"
+            linkTo="/users/list"
           />
         </div>
       </div>
@@ -27,4 +27,4 @@ const Blogs = () => {
   );
 };
 
-export default Blogs;
+export default Users;

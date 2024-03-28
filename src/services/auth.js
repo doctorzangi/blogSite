@@ -1,10 +1,25 @@
 import { httpPost, httpPostR } from "../../rest-api";
 
 const apiPrefix = "api/user";
+const adminPrefix = "admin"
 
 const AuthService = {
   login: async (reqBody) => {
     const response = await httpPost(`${apiPrefix}/login/`, reqBody);
+
+    if (response?.error) {
+      if (response?.error?.message && response?.error?.message.length < 0) {
+        response.error.message = ["Unable to login, please try again later"];
+      }
+
+      return response;
+    }
+
+    return response.data;
+  },
+
+  adminLogin: async (reqBody) => {
+    const response = await httpPost(`${adminPrefix}/login/`, reqBody);
 
     if (response?.error) {
       if (response?.error?.message && response?.error?.message.length < 0) {

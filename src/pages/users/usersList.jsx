@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
 import MainLayout from "../../Layouts/MainLayout";
-import BlogService from "../../services/blogs";
+import UserService from "../../services/user";
 import { useNavigate } from "react-router-dom";
 
-const BlogsList = () => {
-  const [blogs, setBlogs] = useState([]);
+const UsersList = () => {
+  const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [selectedBlog, setSelectedBlog] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);
     setError("");
 
-    BlogService.list()
-      .then((fetchedBlogs) => {
-        setBlogs(fetchedBlogs);
+    UserService.list()
+      .then((fetchedUsers) => {
+        console.log(fetchedUsers);
+        setUsers(fetchedUsers);
       })
       .catch((fetchError) => {
         setError(fetchError);
@@ -26,32 +26,31 @@ const BlogsList = () => {
       });
   }, []);
 
-  const handleViewMore = (blogId) => {
-    navigate(`/blogs/detail/${blogId}`)
+  const handleViewMore = (userId) => {
+    navigate(`/users/${userId}/change`);
   };
 
   return (
     <MainLayout>
       <div className="flex flex-col">
         <div className="section p-5">
-          <h2 className="section-title text-3xl font-bold m-5">Blogs List</h2>
+          <h2 className="section-title text-3xl font-bold m-5">Users List</h2>
           <div className="cards grid items-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 mx-4">
-            {blogs.map((blog) => (
+            {users.map((user) => (
               <div
-                key={blog.id} // Assuming each blog has a unique id
+                key={user.id}
                 className="card flex flex-col justify-between bg-white p-5 rounded-lg mx-2 xs:mx-0 w-72 h-90 transition-transform transform hover:scale-105"
                 style={{ width: "18rem", height: "15rem" }}
               >
                 <div>
                   <h3 className="text-gray-700 text-lg font-semibold mb-2">
-                    {blog.title}
+                    {user.name}
                   </h3>
-                  <p className="text-black line-clamp-4">{blog.content}</p>
-                  <p className="text-gray-500 mt-2">Author: {blog.author}</p>
+                  <p className="text-black line-clamp-2">{user.email}</p>
                 </div>
                 <button
                   className="flex btn-primary mt-4 hover:font-semibold text-indigo-600"
-                  onClick={()=> handleViewMore(blog.id)}
+                  onClick={handleViewMore}
                 >
                   View More --{">"}
                 </button>
@@ -64,4 +63,4 @@ const BlogsList = () => {
   );
 };
 
-export default BlogsList;
+export default UsersList;

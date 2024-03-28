@@ -1,12 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Transition from '../utils/Transition';
+import { AuthContext } from '../components/auth/AuthContext';
 
 import UserAvatar from '../images/user-avatar-32.png';
 
-function DropdownProfile({
-  align
-}) {
+function DropdownProfile({ align }) {
+  const { isAuthenticated } = useContext(AuthContext);
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -45,7 +45,7 @@ function DropdownProfile({
       >
         <img className="w-8 h-8 rounded-full" src={UserAvatar} width="32" height="32" alt="User" />
         <div className="flex items-center truncate">
-          <span className="truncate ml-2 text-sm font-medium text-black dark:text-slate-300 group-hover:text-opacity-80 dark:group-hover:text-slate-200">Acme Inc.</span>
+          <span className="truncate ml-2 text-sm font-medium text-black dark:text-slate-300 group-hover:text-opacity-80 dark:group-hover:text-slate-200">{isAuthenticated ? user.name : 'Guest'}</span>
           <svg className="w-3 h-3 shrink-0 ml-1 fill-current text-gray-700" viewBox="0 0 12 12">
             <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
           </svg>
@@ -68,19 +68,20 @@ function DropdownProfile({
           onBlur={() => setDropdownOpen(false)}
         >
           <div className="pt-0.5 pb-2 px-3 mb-1 border-b border-slate-200 dark:border-slate-700">
-            <div className="font-medium text-black dark:text-slate-100">Acme Inc.</div>
-            <div className="text-xs text-gray-700 dark:text-slate-400 italic">Administrator</div>
+            <div className="font-medium text-black dark:text-slate-100">{isAuthenticated ? user.name : 'Guest'}</div>
           </div>
           <ul>
-            <li>
-              <Link
-                className="font-medium text-sm text-black hover:text-opacity-80 dark:hover:text-indigo-400 flex items-center py-1 px-3"
-                to="/settings"
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-              >
-                Settings
-              </Link>
-            </li>
+            {isAuthenticated && (
+              <li>
+                <Link
+                  className="font-medium text-sm text-black hover:text-opacity-80 dark:hover:text-indigo-400 flex items-center py-1 px-3"
+                  to="/settings"
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                >
+                  Admin Settings
+                </Link>
+              </li>
+            )}
             <li>
               <Link
                 className="font-medium text-sm text-black hover:text-opacity-80 dark:hover:text-indigo-400 flex items-center py-1 px-3"
@@ -94,7 +95,7 @@ function DropdownProfile({
         </div>
       </Transition>
     </div>
-  )
+  );
 }
 
 export default DropdownProfile;

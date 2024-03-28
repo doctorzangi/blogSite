@@ -1,16 +1,15 @@
 import { httpPostR, httpGet, httpDelete, httpPut } from "../../rest-api";
 
-
 const apiUrlPrefix = "api/user/";
 
-const BlogService = {
+const CategoryService = {
   list: async () => {
-    const response = await httpGet(`${apiUrlPrefix}/blogposts/`);
+    const response = await httpGet(`${apiUrlPrefix}/categories/`);
 
     if (response?.error) {
       if (response?.error?.message && response?.error?.message.length < 0) {
         response.error.message = [
-          "Unable to list Blogs, please try again later",
+          "Unable to list Categories, please try again later",
         ];
       }
 
@@ -21,16 +20,12 @@ const BlogService = {
   },
 
   add: async (reqBody) => {
-    const response = await httpPostR(
-      `${apiUrlPrefix}/blogposts/`,
-      reqBody,
-      true
-    );
+    const response = await httpPostR(`${apiUrlPrefix}/categories/`, reqBody, true);
 
     if (response?.error) {
       if (response?.error?.message && response?.error?.message.length < 0) {
         response.error.message = [
-          "Unable to create Blog, please try again later",
+          "Unable to create Category, please try again later",
         ];
       }
 
@@ -40,13 +35,17 @@ const BlogService = {
     return response.data;
   },
 
-  update: async ({reqBody, id}) => {
-    const response = await httpPut(`${apiUrlPrefix}/blogposts/${id}/`, reqBody, true);
+  update: async ({ reqBody, id }) => {
+    const response = await httpPut(
+      `${apiUrlPrefix}/categories/${id}/`,
+      reqBody,
+      true
+    );
 
     if (response?.error) {
       if (response?.error?.message && response?.error?.message.length < 0) {
         response.error.message = [
-          "Unable to update Blog, please try again later",
+          "Unable to update Category, please try again later",
         ];
       }
 
@@ -57,12 +56,12 @@ const BlogService = {
   },
 
   delete: async (id) => {
-    const response = await httpDelete(`${apiUrlPrefix}/blogposts/${id}/`);
+    const response = await httpDelete(`${apiUrlPrefix}/categories/${id}/`);
 
     if (response?.error) {
       if (response?.error?.message && response?.error?.message.length < 0) {
         response.error.message = [
-          "Unable to delete Blog, please try again later",
+          "Unable to delete Category, please try again later",
         ];
       }
 
@@ -72,7 +71,7 @@ const BlogService = {
     if (response?.status !== 200) {
       return {
         error: true,
-        message: ["Unable to delete Blog, please try again later"],
+        message: ["Unable to delete Category, please try again later"],
       };
     }
 
@@ -80,13 +79,11 @@ const BlogService = {
   },
 
   detail: async (id) => {
-    const response = await httpGet(`${apiUrlPrefix}/blogposts/${id}/`);
+    const response = await httpGet(`${apiUrlPrefix}/categories/${id}/`);
 
     if (response?.error) {
       if (response?.error?.message && response?.error?.message.length < 0) {
-        response.error.message = [
-          "Unable to get Blog, please try again later",
-        ];
+        response.error.message = ["Unable to get Category, please try again later"];
       }
 
       return response;
@@ -96,4 +93,4 @@ const BlogService = {
   },
 };
 
-export default BlogService;
+export default CategoryService;

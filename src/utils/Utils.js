@@ -28,6 +28,20 @@ export const formatValue = (value) => Intl.NumberFormat('en-US', {
   notation: 'compact',
 }).format(value);
 
+
+export const getLoginToken = () => {
+  return JSON.parse(localStorage.getItem("userToken"));
+};
+
+export const removeLoginToken = () => {
+  localStorage.removeItem("userToken");
+  return true;
+};
+
+export const setLoginToken = (token) => {
+  localStorage.setItem("userToken", JSON.stringify(token));
+};
+
 export const getUserDetailsFromJwt = (token) => {
   try {
     let tokenToDecode = token;
@@ -50,21 +64,8 @@ export const getUserDetailsFromJwt = (token) => {
   }
 };
 
-export const getLoginToken = () => {
-  return JSON.parse(localStorage.getItem("userToken"));
-};
-
-export const removeLoginToken = () => {
-  localStorage.removeItem("userToken");
-  return true;
-};
-
-export const setLoginToken = (token) => {
-  localStorage.setItem("userToken", JSON.stringify(token));
-};
-
 // export const getRefreshToken = () => {
-//   return JSON.parse(localStorage.getItem("refreshToken"));
+  //   return JSON.parse(localStorage.getItem("refreshToken"));
 // };
 
 // // Set the refresh token in local storage

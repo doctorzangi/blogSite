@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import MainLayout from "../../Layouts/MainLayout";
 import Widget from "../../components/zWidget";
 import ProjectService from "../../services/projects";
-import { FaAddressCard } from "react-icons/fa";
+import { FaGetPocket, FaPlus } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
 
 const Projects = () => {
@@ -31,41 +31,17 @@ const Projects = () => {
       <div className="container mx-auto mt-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-4 p-4">
           <Widget
-            icon={<FaAddressCard className="h-7 w-7" />}
+            icon={<FaPlus className="h-7 w-7" />}
             title="New Projects"
             subtitle="Create Project"
             linkTo="/projects/newproject"
             onClick={handleAddProject}
           />
           <Widget
-            icon={<FaAddressCard className="h-7 w-7" />}
+            icon={<FaGetPocket className="h-7 w-7" />}
             title="Retrieve Projects"
             subtitle="Projects List"
             linkTo="/projects/list"
-          />
-          <Widget
-            icon={<FaAddressCard className="h-7 w-7" />}
-            title="Projects"
-            subtitle="New Project"
-            linkTo="/projects/newproject"
-          />
-          <Widget
-            icon={<FaAddressCard className="h-7 w-7" />}
-            title="Projects"
-            subtitle="New Project"
-            linkTo="/projects/newproject"
-          />
-          <Widget
-            icon={<FaAddressCard className="h-7 w-7" />}
-            title="Projects"
-            subtitle="New Project"
-            linkTo="/projects/newproject"
-          />
-          <Widget
-            icon={<FaAddressCard className="h-7 w-7" />}
-            title="Projects"
-            subtitle="New Project"
-            linkTo="/projects/newproject"
           />
         </div>
       </div>

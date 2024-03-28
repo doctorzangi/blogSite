@@ -1,21 +1,41 @@
 import React, { useState, useEffect } from "react";
-import MainLayout from "../../Layouts/MainLayout";
+import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BlogService from "../../services/blogs";
-import AuthorService from "../../services/author";
+import AuthorService from '../../services/author'
 import CategoryService from '../../services/category'
-import { useNavigate } from "react-router-dom";
+import MainLayout from "../../Layouts/MainLayout";
 
-const NewBlog = () => {
-  const [categories, setCategories] = useState([]);
-  const [categoryId, setCategoryId] = useState("");
+const UpdateBlog = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [publishedDate, setPublishedDate] = useState("");
-  const [authorId, setAuthorId] = useState("");
+  const [published_date, setPublishedDate] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [categoryId, setCategoryId] = useState("");
   const [authors, setAuthors] = useState([]);
+  const [authorId, setAuthorId] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { blogId } = useParams();
+
+  useEffect(() => {
+    const fetchBlogDetails = async () => {
+      try {
+        const blogDetails = await BlogService.detail(blogId);
+        setTitle(blogDetails.title);
+        setContent(blogDetails.content);
+        setPublishedDate(blogDetails.published_date);
+        setCategoryId(blogDetails.categoryId);
+        setAuthorId(blogDetails.authorId);
+      } catch (error) {
+        console.error("Error fetching blog details:", error);
+        toast.error("Error fetching blog details. Please try again.");
+      }
+    };
+
+    fetchBlogDetails();
+  }, [blogId]);
 
   useEffect(() => {
     const fetchAuthors = async () => {
@@ -46,39 +66,49 @@ const NewBlog = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const formData = {
-        title: title,
-        content: content,
-        published_date: publishedDate,
-        category: categoryId,
-        author: authorId,
-      };
+      setLoading(true);
+      let formData = new FormData();
+      formData.append("title", title);
+      formData.append("content", content);
+      formData.append("category", categoryId);
+      formData.append("author", authorId);
+      formData.append("published_date", published_date);
 
-      const addedBlog = await BlogService.add(formData);
+      const updatedBlog = await BlogService.update({
+        reqBody: formData,
+        id: blogId,
+      });
 
-      if (addedBlog) {
-        toast.success("Blog created successfully!");
+      if (updatedBlog) {
+        toast.success("Blog updated successfully!");
         navigate("/blogs");
       } else {
-        toast.error("Failed to create blog. Please try again.");
-        console.log(addedBlog);
+        toast.error("Failed to update blog. Please try again.");
       }
     } catch (error) {
-      console.error("Error creating blog:", error);
-      toast.error("Error creating blog. Please try again.");
+      console.error("Error updating blog:", error);
+      toast.error("Error updating blog. Please try again.");
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const handleCancel = () => {
+    navigate(`/blogs/detail/${blogId}`);
   };
 
   return (
     <MainLayout>
       <div className="container p-9 py-8">
         <div className="flex">
-          <h1 className="text-3xl font-bold mb-4">Create New Blog</h1>
+          <h1 className="text-3xl font-bold mb-4">Update Blog</h1>
+          <div></div>
         </div>
         <form
           className="bg-white p-6 rounded-md shadow-md"
           onSubmit={handleSubmit}
         >
+          
           {/* Title */}
           <div className="mb-4">
             <label
@@ -132,7 +162,7 @@ const NewBlog = () => {
               type="datetime-local"
               id="blogPublishedDate"
               name="published_date"
-              value={publishedDate}
+              value={published_date}
               onChange={(e) => setPublishedDate(e.target.value)}
               required
             />
@@ -187,11 +217,13 @@ const NewBlog = () => {
               ))}
             </select>
           </div>
-
-          {/* Submit Button */}
           <div className="flex flex-row items-center justify-end">
             <div className="mt-6 mr-5">
-              <button className="bg-gray-700 text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition duration-300">
+              <button
+                type="button"
+                onClick={handleCancel}
+                className="bg-gray-700 text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition duration-300"
+              >
                 Cancel
               </button>
             </div>
@@ -199,8 +231,9 @@ const NewBlog = () => {
               <button
                 type="submit"
                 className="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition duration-300"
+                disabled={loading}
               >
-                Create
+                {loading ? "Updating..." : "Update"}
               </button>
             </div>
           </div>
@@ -211,4 +244,4 @@ const NewBlog = () => {
   );
 };
 
-export default NewBlog;
+export default UpdateBlog;

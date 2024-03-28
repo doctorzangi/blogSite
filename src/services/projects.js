@@ -10,7 +10,7 @@ const ProjectService = {
     if (response?.error) {
       if (response?.error?.message && response?.error?.message.length < 0) {
         response.error.message = [
-          "Unable to list wishlist, please try again later",
+          "Unable to list Projects, please try again later",
         ];
       }
 

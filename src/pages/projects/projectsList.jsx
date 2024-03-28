@@ -3,7 +3,7 @@ import MainLayout from "../../Layouts/MainLayout";
 import ProjectService from "../../services/projects";
 import { useNavigate } from "react-router-dom";
 
-const ProjectList = () => {
+const ProjectsList = () => {
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -54,7 +54,7 @@ const ProjectList = () => {
                 <p className="text-black line-clamp-2">{project.description}</p>
                 <button
                   className="btn-primary mt-4 hover:font-semibold text-indigo-600"
-                  onClick={() => handleViewMore(project.id)} // Pass projectId to handleViewMore
+                  onClick={() => handleViewMore(project.id)}
                 >
                   View More --{">"}
                 </button>
@@ -67,4 +67,4 @@ const ProjectList = () => {
   );
 };
 
-export default ProjectList;
+export default ProjectsList;
