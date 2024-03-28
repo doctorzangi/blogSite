@@ -3,7 +3,7 @@ import MainLayout from "../../Layouts/MainLayout";
 import Widget from "../../components/zWidget";
 import ProjectService from "../../services/projects";
 import { FaAddressCard } from "react-icons/fa";
-import DetailedProject from "./detailedProject";
+import { toast, ToastContainer } from "react-toastify";
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
@@ -20,8 +20,9 @@ const Projects = () => {
 
       const addedProject = await ProjectService.add(newProject);
       setProjects([...projects, addedProject]);
+      toast.success("Project added successfully!");
     } catch (error) {
-      console.error("Error adding project:", error);
+      toast.error("Error adding project");
     }
   };
 
@@ -68,6 +69,7 @@ const Projects = () => {
           />
         </div>
       </div>
+      <ToastContainer />
     </MainLayout>
   );
 };

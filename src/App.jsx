@@ -18,6 +18,9 @@ import { AuthProvider } from "./components/auth/AuthContext";
 import { ModalProvider } from "./components/auth/ModalContext";
 import ProjectList from "./pages/projects/projectList";
 import UpdateProject from "./pages/projects/updateProject";
+import Blogs from "./pages/blog/blogs";
+import BlogsList from "./pages/blog/blogsList";
+import ProjectDetail from "./pages/projects/projectDetail";
 
 function App() {
   const location = useLocation();
@@ -42,8 +45,11 @@ function App() {
             <Route exact path="/projects" element={<Projects />} />
             <Route exact path="/projects/list" element={<ProjectList />} />
             <Route exact path="/projects/newproject" element={<NewProject />} />
-            <Route exact path="/projects/:projectId" element={<UpdateProject />} />
+            <Route exact path="/projects/update/:projectId" element={<UpdateProject />} />
+            <Route exact path="/projects/detail/:projectId" element={<ProjectDetail />} />
+            <Route exact path="/blogs" element={<Blogs />} />
             <Route exact path="/blogs/newblog" element={<NewBlog />} />
+            <Route exact path="/blogs/list" element={<BlogsList />} />
           </Routes>
         </ModalProvider>
       </AuthProvider>

@@ -179,14 +179,14 @@ const NewProject = () => {
           </div>
           <div className="flex flex-row items-center justify-end">
             <div className="mt-6 mr-5">
-              <button className="bg-gray-700 text-white py-2 px-4 rounded-md hover:bg-gray-600 transition duration-300">
+              <button className="bg-gray-700 text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition duration-300">
                 Cancel
               </button>
             </div>
             <div className="mt-6">
               <button
                 type="submit"
-                className="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-gray-600 transition duration-300"
+                className="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition duration-300"
               >
                 Create
               </button>

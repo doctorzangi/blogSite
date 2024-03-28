@@ -70,7 +70,7 @@ const UpdateProject = () => {
   };
 
   const handleCancel = () => {
-    navigate("/projects");
+    navigate(`/projects/detail/${projectId}`);
   };
 
   return (
@@ -216,7 +216,7 @@ const UpdateProject = () => {
               <button
                 type="button"
                 onClick={handleCancel}
-                className="bg-gray-700 text-white py-2 px-4 rounded-md hover:bg-gray-600 transition duration-300"
+                className="bg-gray-700 text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition duration-300"
               >
                 Cancel
               </button>
@@ -224,7 +224,7 @@ const UpdateProject = () => {
             <div className="mt-6">
               <button
                 type="submit"
-                className="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-gray-600 transition duration-300"
+                className="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition duration-300"
                 disabled={loading}
               >
                 {loading ? "Updating..." : "Update"}

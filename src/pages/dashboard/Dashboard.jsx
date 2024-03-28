@@ -22,9 +22,9 @@ function Dashboard() {
         />
         <Widget
           icon={<FaUsers className="h-7 w-7" />}
-          title="Blogs"
-          subtitle="New Blog"
-          linkTo="/blogs/newblog"
+          title="Blogs Data"
+          subtitle="Blogs"
+          linkTo="/blogs"
         />
         <Widget
           icon={<FaChartBar className="h-7 w-7" />}

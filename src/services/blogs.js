@@ -3,9 +3,9 @@ import { httpPostR, httpGet, httpDelete, httpPut } from "../../rest-api";
 
 const apiUrlPrefix = "api/user/";
 
-const ProjectService = {
+const BlogService = {
   list: async () => {
-    const response = await httpGet(`${apiUrlPrefix}/projects/`);
+    const response = await httpGet(`${apiUrlPrefix}/blogposts/`);
 
     if (response?.error) {
       if (response?.error?.message && response?.error?.message.length < 0) {
@@ -22,7 +22,7 @@ const ProjectService = {
 
   add: async (reqBody) => {
     const response = await httpPostR(
-      `${apiUrlPrefix}/projects/`,
+      `${apiUrlPrefix}/blogposts/`,
       reqBody,
       true
     );
@@ -30,7 +30,7 @@ const ProjectService = {
     if (response?.error) {
       if (response?.error?.message && response?.error?.message.length < 0) {
         response.error.message = [
-          "Unable to create Project, please try again later",
+          "Unable to create Blog, please try again later",
         ];
       }
 
@@ -41,12 +41,12 @@ const ProjectService = {
   },
 
   update: async ({reqBody, id}) => {
-    const response = await httpPut(`${apiUrlPrefix}/projects/${id}/`, reqBody, true);
+    const response = await httpPut(`${apiUrlPrefix}/blogposts/${id}/`, reqBody, true);
 
     if (response?.error) {
       if (response?.error?.message && response?.error?.message.length < 0) {
         response.error.message = [
-          "Unable to update Project, please try again later",
+          "Unable to update Blog, please try again later",
         ];
       }
 
@@ -57,40 +57,35 @@ const ProjectService = {
   },
 
   delete: async (id) => {
-    try {
-      const response = await httpDelete(`${apiUrlPrefix}/projects/${id}/`);
-  
-      if (response?.error) {
-        if (response?.error?.message && response?.error?.message.length < 0) {
-          response.error.message = [
-            "Unable to delete Project, please try again later",
-          ];
-        }
-        return response;
-      }
-  
-      if (response?.status !== 200) {
-        return {
-          error: true,
-          message: ["Unable to delete Project, please try again later"],
-        };
-      }
-  
-      return response.data;
-    } catch (error) {
-      console.error("Error deleting project:", error);
-      // Handle error if necessary
-      throw error; // Rethrow the error to propagate it further if needed
-    }
-  },  
-
-  detail: async (id) => {
-    const response = await httpGet(`${apiUrlPrefix}/projects/${id}/`);
+    const response = await httpDelete(`${apiUrlPrefix}/blogposts/${id}/`);
 
     if (response?.error) {
       if (response?.error?.message && response?.error?.message.length < 0) {
         response.error.message = [
-          "Unable to get Project details, please try again later",
+          "Unable to delete Blog, please try again later",
+        ];
+      }
+
+      return response;
+    }
+
+    if (response?.status !== 200) {
+      return {
+        error: true,
+        message: ["Unable to delete Blog, please try again later"],
+      };
+    }
+
+    return response.data;
+  },
+
+  detail: async (id) => {
+    const response = await httpGet(`${apiUrlPrefix}/blogposts/${id}/`);
+
+    if (response?.error) {
+      if (response?.error?.message && response?.error?.message.length < 0) {
+        response.error.message = [
+          "Unable to get Blog, please try again later",
         ];
       }
 
@@ -101,4 +96,4 @@ const ProjectService = {
   },
 };
 
-export default ProjectService;
+export default BlogService;
